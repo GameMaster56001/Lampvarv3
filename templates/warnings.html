@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}User Warnings{% endblock %}
+{% block content %}
+   <h1>User Warnings</h1>
+   <hr>
+   {% if warn %}
+      {% for warning in warn %}
+         {% set warning_type_dict = {4: 'Account Suspension', 1: 'No punishment', 3: 'Posting ability revoked', 2: 'All posts deleted'} %}
+         {% set warning_type_description = warning_type_dict.get(warning[2], '') %}
+         <div class="card mb-3">
+            <div class="card-header bg-danger text-white">{{warning_type_description}}</div>
+            <div class="card-body">
+               <h5 class="card-title">Reason: {{warning[3]}}</h5>
+               <p class="card-text">Moderator: {{warning[4]}}</p>
+               <p class="card-text"><small class="text-muted">Warned on: {{warning[5]}}</small></p>
+            </div>
+         </div><br/>
+      {% endfor %}
+   {% else %}
+      <p>No warnings yet</p>
+   {% endif %}
+{% endblock %}
+
+{% block styles %}
+   <style>
+      .card {
+         width: 80%;
+         margin: auto;
+      }
+   </style>
+{% endblock %}

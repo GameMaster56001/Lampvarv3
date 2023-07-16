@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Warn
+{% endblock %}
+
+{% block content %}
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <form action="#" method="post" class="bg-white shadow rounded-lg p-5">
+                    <h1 class="text-center mb-4">Warning</h1>
+
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username:</label>
+                        <input type="text" name="username" id="username" class="form-control" placeholder="Enter username">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="reason" class="form-label">Reason:</label>
+                        <input type="text" name="reason" id="reason" class="form-control" placeholder="Enter reason">
+                    </div>
+<div class="mb-3">
+                        <label for="warning-type" class="form-label">Warning type:</label>
+                        <select name="warning_type" id="warning-type" class="form-control">
+                            <option value="1">Normal warning</option>
+                            <option value="2">All posts deleted</option>
+                            <option value="3">Revokes user posting ability</option>
+                            <option value="4">Account suspension</option>
+                        </select>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-warning btn-block mt-4">Warn User</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        h1 {
+            font-weight: bold;
+            font-size: 2rem;
+            color: #343a40;
+        }
+
+        label {
+            font-weight: bold;
+            color: #6c757d;
+        }
+
+        input[type="text"],
+        select {
+            border: none;
+            border-radius: 0;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 10px 15px;
+            font-size: 1rem;
+            color: #343a40;
+        }
+
+        input[type="text"]::placeholder,
+        select option {
+            color: #b5bbc1;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+
+        .btn-warning:hover {
+            background-color: #ff9800;
+            border-color: #ff9800;
+        }
+    </style>
+{% endblock %}

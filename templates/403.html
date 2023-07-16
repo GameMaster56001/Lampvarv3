@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    403 - Forbidden
+{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        max-width: 700px;
+    }
+
+    h1 {
+        font-size: 5rem;
+        color: #ff6b6b;
+        margin-bottom: 0.5rem;
+        text-shadow: 2px 2px #343a40;
+    }
+
+    h2 {
+        font-size: 3rem;
+        color: #343a40;
+        margin-bottom: 2rem;
+        text-shadow: 2px 2px #c3c3c3;
+    }
+
+    p {
+        font-size: 1.5rem;
+        color: #343a40;
+        line-height: 1.5;
+        margin-bottom: 4rem;
+    }
+
+    .btn-primary {
+        background-color: #ff6b6b;
+        border-color: #ff6b6b;
+        font-size: 1.25rem;
+        padding: 0.75rem 1.5rem;
+    }
+
+    .btn-primary:hover {
+        background-color: #ff4c4c;
+        border-color: #ff4c4c;
+    }
+
+    .btn-secondary {
+        background-color: #343a40;
+        border-color: #343a40;
+        font-size: 1.25rem;
+        padding: 0.75rem 1.5rem;
+    }
+
+    .btn-secondary:hover {
+        background-color: #212529;
+        border-color: #212529;
+    }
+</style>
+
+<div class="container d-flex flex-column align-items-center justify-content-center vh-100">
+    <h1 class="text-center"><i class="fas fa-tools"></i></h1>
+    <h1 class="text-center mb-4">403 - Forbidden</h1>
+    <h2 class="text-center mb-5">Access Denied</h2>
+    <p class="text-center mb-5">You do not have the correct permissions to access this page. This page is only available to staff members or you may have been banned from accessing it.</p>
+    <div class="d-flex justify-content-center">
+        <button class="btn btn-primary mr-3" onClick="navigateHome()">Home</button>
+        <button class="btn btn-secondary" onClick="navigateLogout()">Logout</button>
+</div>
+</div>
+
+<script>
+    function navigateLogout() {
+        window.location.replace("/logout")
+    }
+    function navigateHome(){
+        window.location.replace("/home")
+    }
+</script>
+{% endblock %}

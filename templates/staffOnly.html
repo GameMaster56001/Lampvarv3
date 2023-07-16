@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Admin panel
+{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <div class="row justify-content-between">
+      <div class="col-md-3 text-center">
+        <a href="staff-only/reports"><i class="bi bi-flag"></i> View reports</a>
+      </div>
+      <div class="col-md-3 text-center">
+        <a href="warn"><i class="bi bi-exclamation-circle"></i> Warn user</a>
+      </div>
+      <div class="col-md-3 text-center">
+        <a href="all-users"><i class="bi bi-people"></i> View all users</a>
+      </div>
+      <div class="col-md-3 text-center">
+        <a href="ban-list"><i class="bi bi-hammer"></i> View ban list</a>
+      </div>
+      <div class="col-md-3 text-center">
+        <a href="staff-only/ban"><i class="bi bi-hat"></i> Ban station</a>
+      </div>
+      <div class="col-md-3 text-center">
+        <a href="staff-only/unban"><i class="bi bi-block"></i> Unban station</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

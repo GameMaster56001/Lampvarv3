@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}
+New post
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6 text-center">
+      <h1 class="text-primary mb-4">Create a new post</h1>
+
+      <form action="#" method="post">
+        <div class="form-group">
+          <textarea type="text" class="form-control" id="postinput" name="text" placeholder="Post content"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg">Post</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<style>
+body {
+  background-color: #f8f9fa;
+  font-family: 'Roboto', sans-serif;
+  color: #343a40;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 3rem;
+  margin-bottom: 30px;
+}
+
+#postinput {
+  border-color: #dcdcdc;
+  border-radius: 20px;
+  font-size: 1.5rem;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  font-weight: bold;
+  font-size: 1.5rem;
+  padding: 20px 40px;
+}
+
+.btn-primary:hover {
+  background-color: #0062cc;
+  border-color: #005cbf;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Moderate
+{% endblock %}
+
+{% block content %}
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <h1 class="text-center mb-4">Account Summary</h1>
+
+                <img src="{{ url_for('get_image', username=username) }}" alt="" class="profile-pic">
+
+                {% if role == "Admin" and not session["username"] == "youssef" %}
+                    <p class="lead text-center">User is an admin and cannot be moderated.</p>
+                {% else %}
+                    <div class="card shadow rounded-lg mb-4">
+<div class="card-body">
+                            <h5 class="card-title">Username:</h5>
+                            <p class="card-text">{{ username }}</p>
+                        </div>
+                    </div>
+
+                    <div class="card shadow rounded-lg mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Gender:</h5>
+                            <p class="card-text">{{ gender }}</p>
+                        </div>
+                    </div>
+
+                    <div class="card shadow rounded-lg mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Website Rank:</h5>
+                            <p class="card-text">{{ role }}</p>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 mb-4">
+                        <a href="/banU/{{ username }}" class="btn btn-danger">Ban User</a>
+                    </div>
+
+                    <div class="d-grid gap-2 mb-4">
+                        <a href="/unban/{{ username }}" class="btn btn-success">Unban user</a>
+                    </div>
+
+                    <div class="d-grid gap-2 mb-4">
+                        <a href="/purge-all-posts/{{ username }}" class="btn btn-primary">Purge All Forum Posts</a>
+                    </div>
+                    {% if session["username"] == "youssef" %}
+                     <form action="#" method="post" class="mb-5">
+                        <div class="input-group">
+                            <select id="rank" name="rank" class="form-control form-select-lg me-3">
+                                <option value="none" selected>Rank</option>
+                                <option value="User">User</option>
+                                <option value="Admin">Admin</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary">Update Rank</button>
+                        </div>
+                    </form>
+                {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        h1 {
+            font-weight: bold;
+            font-size: 2rem;
+            color: #343a40;
+        }
+
+        p.lead {
+            font-size: 1.25rem;
+            line-height: 1.5;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-weight: bold;
+            font-size: 1.25rem;
+            color: #6c757d;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            color: #343a40;
+            line-height: 1.5;
+        }
+
+    .profile-pic {
+        border-radius: 50%;
+        border: 5px solid black;
+        height: 150px;
+        width: 150px;
+        object-fit: cover;
+    }
+    </style>
+{% endblock %}

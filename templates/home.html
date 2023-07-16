@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    {% set greeting = '' %}
+    {% if gender == "Male" %}
+        {% set greeting = 'Mr.' %}
+    {% elif gender == "Female" %}
+        {% set greeting = 'Mrs.' %}
+    {% endif %}
+
+    {% if 0 not in session["experiments"] %}
+      <section class="hero">
+            <div class="container">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-md-7 col-lg-6 text-center text-md-left mb-5 mb-md-0">
+                        <img src="{{ url_for('get_image', username=session['username']) }}" alt="Profile Picture" class="profile-pic">
+                        <h1 class="display-4 mb-3 animate animatedfadeInDownBig">Welcome, {{ greeting }} {{ username }}!</h1>
+                        <p class="lead mb-5 animate animatedfadeInUpBig delay-1s">Hello, {{ username }}! We are thrilled to have you here.</p>
+                        <button class="btn btn-primary mr-3 mb-3 px-4 animate animatedflipInX delay-2s" onclick="navigateSettings()"><i class="bi bi-gear"></i> Settings</button>
+                        {% if session["role"] == "Admin" %}
+                        <a href="/staff-only"><button class="btn btn-secondary mr-3 mb-3 px-4 animate animatedflipInX delay-2s"><i class="bi bi-shield"></i> Admin Panel</button></a>
+                        {% endif %}
+                        <a href="/warnings"><button class="btn btn-secondary mr-3 mb-3 px-4 animate animatedflipInX delay-2s"><i class="bi bi-exclamation-circle"></i> Warnings</button></a>
+                        <a href="/search/{{username}}"><button class="btn btn-secondary mr-3 mb-3 px-4 animate animatedflipInX delay-2s"><i class="bi bi-person"></i> View Profile</button></a>
+                        <a href="/messages"><button class="btn btn-secondary mr-3 mb-3 px-4 animate animatedflipInX delay"><i class="bi bi-chat"></i> Private Messages</button></a>
+                        <a href="/upload-pic"><button class="btn btn-secondary mr-3 mb-3 px-4 animate animatedflipInX delay-2s"><i class="bi bi-image"></i> Edit Profile Picture</button></a>
+                        <a href="/logout"><button class="btn btn-secondary mr-3 mb-3 px-4 animate animated__flipInX delay-2s"><i class="bi bi-box-arrow-right"></i> Logout</button></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% elif 0 in session["experiments"] %}
+        <section class="hero">
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-md-7 col-lg-6 text-center text-md-left mb-5 mb-md-0">
+        <img src="{{ url_for('get_image', username=session['username']) }}" alt="Profile Picture" class="profile-pic">
+        <h1
+class="display-4 mb-3 animate animatedfadeInDownBig">Welcome, Administrator {{ greeting }} {{ username }}!</h1>
+        <p class="lead mb-5 animate animatedfadeInUpBig delay-1s">Hello, Admin {{ username }}! We are thrilled to have you here.</p>
+        <button class="btn btn-secondary mr-3 mb-3 px-4 animate animatedflipInX delay-2s" onclick="navigateSettings()"><i class="bi bi-code-slash"></i> View Experiments</button>
+        <a href="/staff-only"><button class="btn btn-secondary mr-3 mb-3 px-4 animate animatedflipInX delay-2s"><i class="bi bi-shield"></i> Admin Panel</button></a>
+        <a href="/all-users"><button class="btn btn-secondary mr-3 mb-3 px-4 animate animatedflipInX delay-2s"><i class="bi bi-people"></i> View all users</button></a>
+        <a href="/posts"><button class="btn btn-secondary mr-3 mb-3 px-4 animate animatedflipInX delay"><i class="bi bi-chat"></i> Manage posts</button></a>
+        <a href="/upload-pic"><button class="btn btn-secondary mr-3 mb-3 px-4 animate animatedflipInX delay-2s"><i class="bi bi-image"></i> Edit Profile Picture</button></a>
+        <a href="/logout"><button class="btn btn-secondary mr-3 mb-3 px-4 animate animated__flipInX delay-2s"><i class="bi bi-box-arrow-right"></i> Logout</button></a>
+      </div>
+    </div>
+  </div>
+</section>
+    {% else %}
+        <section class="hero">
+            <div class="container">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-md-7 col-lg-6 text-center text-md-left mb-5 mb-md-0">
+                        <img src="{{ url_for('get_image', username=session['username']) }}" alt="Profile Picture" class="profile-pic">
+                        <h1 class="display-4 mb-3 animate animatedfadeInDownBig">Welcome, {{ greeting }} {{ username }}!</h1>
+                        <p class="lead mb-5 animate animatedfadeInUpBig delay-1s">Hello, {{ username }}! We are thrilled to have you here.</p>
+                        <button class="btn btn-primary mr-3 mb-3 px-4 animate animatedflipInX delay-2s" onclick="navigateSettings()"><i class="bi bi-gear"></i> Settings</button>
+                        {% if session["role"] == "Admin" %}
+                        <a href="/staff-only"><button class="btn btn-secondary mr-3 mb-3 px-4 animate animatedflipInX delay-2s"><i class="bi bi-shield"></i> Admin Panel</button></a>
+                        {% endif %}
+                        <a href="/warnings"><button class="btn btn-secondary mr-3 mb-3 px-4 animate animatedflipInX delay-2s"><i class="bi bi-exclamation-circle"></i> Warnings</button></a>
+                        <a href="/search/{{username}}"><button class="btn btn-secondary mr-3 mb-3 px-4 animate animatedflipInX delay-2s"><i class="bi bi-person"></i> View Profile</button></a>
+                        <a href="/messages"><button class="btn btn-secondary mr-3 mb-3 px-4 animate animatedflipInX delay"><i class="bi bi-chat"></i> Private Messages</button></a>
+                        <a href="/upload-pic"><button class="btn btn-secondary mr-3 mb-3 px-4 animate animatedflipInX delay-2s"><i class="bi bi-image"></i> Edit Profile Picture</button></a>
+                        <a href="/logout"><button class="btn btn-secondary mr-3 mb-3 px-4 animate animated__flipInX delay-2s"><i class="bi bi-box-arrow-right"></i> Logout</button></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+<script>
+function navigateSettings() {
+  window.location.replace("/settings");
+}
+</script>
+
+<style>
+.btn { position:relative; }
+.profile-pic { border-radius:50%; border:5px solid black; height:150px; width:150px; object-fit:cover; }
+body { font-family:'Roboto', sans-serif; font-size:1.1rem; color:#333; }
+h1, h2, h3, h4, h5, h6 { font-family:'Poppins', sans-serif; font-weight:bold; }
+a { color:#007bff; text-decoration:none; }
+a:hover { color:#005cbf;
+text-decoration:underline; }
+.hero { background-color:#f1f2f6; padding:7rem 0; }
+.btn-primary { background-color:#0984e3; border-color:#0984e3; font-weight:bold; font-size:1.2rem; padding:10px 25px; transition:all 0.2s ease-in-out; }
+.btn-secondary { background-color:#2d3436; border-color:#2d3436; font-size:1.2rem; padding:10px 25px; transition:all 0.2s ease-in-out; }
+.btn-primary:hover, .btn-secondary:hover { transform:translateY(-3px); box-shadow:0px 3px 15px rgba(9,132,227,0.4); animation:animate__heartBeat 1s infinite; }
+.bi { vertical-align:middle; margin-right:10px; font-size:1.5rem; }
+@media (max-width:768px) {
+  .hero { padding:5rem 0; }
+}
+</style>
+{% endblock %}

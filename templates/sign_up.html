@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Sign up
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <form action="#" method="post">
+    <div class="mb-3">
+      <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+      <div class="short-username" style="color: red; display: none;" id="short-username">
+        Username is too short (must be 6-12 characters).
+      </div>
+      <div class="big-username" style="color: red; display: none;" id="big-username">
+        Username is too large (must be 6-12 characters).
+      </div>
+
+    <div class="mb-3">
+      <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+    </div>
+    <div class="mb-3 position-relative">
+      <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+      <button type="button" class="btn btn-sm btn-outline-secondary position-absolute top-50 end-0 translate-middle-y" onclick="togglePassword()">
+        <i id="eye-icon" class="bi bi-eye-slash"></i>
+      </button>
+      <div class="invalid-feedback">Please enter a valid password.</div>
+    </div>
+     <div class="form-group">
+                <label for="gender">Gender:</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="male" name="gender" value="Male" required>
+                    <label class="form-check-label" for="male">Male</i></label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="female" name="gender" value="Female" required>
+                    <label class="form-check-label" for="female">Female</label>
+          </div>
+          </div><br/><br/>
+
+    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Sign up"></button>
+  </form>
+</div>
+
+<style>
+  body {
+    background-color: #f8f9fa;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  h1 {
+    font-weight: bold;
+    font-size: 2rem;
+    color: #343a40;
+  }
+
+  .btn-primary {
+    background-color: #000000;
+    border-color: #000000; 
+}
+
+.form-check-input:hover {
+  background-color: black;
+}
+</style>
+
+<script>
+  function togglePassword() {
+    var passwordInput = document.getElementById('password');
+    var eyeIcon = document.getElementById('eye-icon');
+
+    passwordInput.type = (passwordInput.type === 'password') ? 'text' : 'password';
+    eyeIcon.classList.toggle('bi-eye-slash');
+    eyeIcon.classList.toggle('bi-eye');
+  }
+
+  var form = document.querySelector('form');
+  form.addEventListener('submit', function(event) {
+    var passwordInput = document.getElementById('password');
+    var invalidFeedback = document.querySelector('.invalid-feedback');
+    event.preventDefault();
+    invalidFeedback.style.display = passwordInput.checkValidity() ? 'none' : 'block';
+  });
+
+</script>
+{% endblock %}

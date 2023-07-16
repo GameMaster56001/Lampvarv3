@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Send PM Message
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <form action="#" method="post">
+    <div class="form-group">
+      <label for="username">User to send</label>
+      <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+    </div>
+    <div class="form-group">
+      <label for="content">Message Content</label>
+      <textarea class="form-control" name="content" id="content" rows="3" placeholder="Enter text"></textarea>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Send"></input>
+  </form>
+</div>
+
+<style>
+  .container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .form-group label {
+    font-weight: bold;
+  }
+</style>
+{% endblock %}

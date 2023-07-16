@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %}Posts{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6 text-center mb-5">
+        <h1 class="display-4 mb-3">Posts</h1>
+        {% if session["canPost"] == True %}
+        <a href="/create-post" class="btn btn-primary"><i class="bi bi-pencil-fill"></i> New Post</a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        {% for post in posts|reverse %}
+        <div class="card mb-4">
+          <div class="card-header d-flex justify-content-between align-items-center bg-white">
+            <div class="d-flex align-items-center">
+              <img src="{{ url_for('get_image', username=post[1]) }}" alt="" class="profile-pic" style="width: 100px; height: auto;">
+              <div class="ml-3">
+                <a href="/search/{{post[1]}}" style="margin-left: 10px;">{{ post[1] }}</a><br/>
+                <span class="text-muted">{{ post[2] }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-text">{{ post[3] }}</p>
+          </div>
+          <div class="card-footer bg-white">
+            {% if session["username"] == post[1] or 0 in session["experiments"] %}
+            <form action="/delete-post/{{ post[0] }}" method="post" style="display: inline;">
+              <button type="submit" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
+            </form>
+            {% if session["canPost"] == True %}
+            <a href="/edit-post/{{ post[0] }}" class="btn btn-primary"><i class="bi bi-pencil-fill"></i></a>
+            {% endif %}
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+        {% if not posts %}
+        <p>No posts yet sadly :(</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .profile-pic {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: 5px solid black;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .text-muted {
+    font-size: 1rem;
+  }
+
+  .text-secondary {
+    font-size: 1.2rem;
+    margin-right: 10px;
+  }
+</style>
+
+{% endblock %}

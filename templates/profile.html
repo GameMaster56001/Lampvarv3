@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  User Profile
+{% endblock %}
+
+{% block content %}
+  <section class="hero">
+    <div class="container text-center py-5">
+      <h1 class="display-4 font-weight-bold mb-3">{{ profileData[1] }}'s Profile</h1>
+    </div>
+  </section>
+
+  <section class="profile-info">
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+          <div class="profile-picture-container">
+            <img src="{{ url_for('get_image', username=profileData[1]) }}" alt="Profile Picture" class="profile-pic">
+          </div>
+          <ul class="list-group shadow rounded mt-4">
+            <li class="list-group-item d-flex align-items-center">
+              <span class="font-weight-bold mr-2">ID: </span> {{ profileData[0] }}
+            </li>
+            <li class="list-group-item d-flex align-items-center">
+              <span class="font-weight-bold mr-2">Username: </span> {{ profileData[1] }}
+            </li>
+            {% if 0 in session["experiments"] %}
+            <li class="list-group-item d-flex align-items-center">
+              <span class="font-weight-bold mr-2">Email: </span> {{ profileData[2] }}
+            </li>
+
+            <li class="list-group-item d-flex align-items-center">
+              <span class="font-weight-bold mr-2">IP Address: </span> {{ profileData[6] }}
+            </li>
+            {% endif %}
+            <li class="list-group-item d-flex align-items-center">
+              <span class="font-weight-bold mr-2">Creation Date: </span> {{ profileData[7] }}
+            </li>
+            <li class="list-group-item d-flex align-items-center">
+              <span class="font-weight-bold mr-2">Gender: </span> {{ profileData[4] }} 
+            </li>
+            <li class="list-group-item d-flex align-items-center">
+              <span class="font-weight-bold mr-2">Website Rank: </span> {{ profileData[8] }}
+            </li>
+          </ul>
+          {% if profileData[8] == 'Admin' and role == 'Admin' %}
+            <div class="d-flex justify-content-end mt-4">
+              <button class="btn btn-danger mr-2" onclick="reportUser()">Report Abuse</button>
+              <button class="btn btn-secondary disabled">Ban User</button>
+              <a href='/send-pm'><button class="btn btn-primary ml-2"><i class="bi bi-chat"></i> Send Private Message</button></a>
+              {% if 0 in session["experiments"] %}
+              <a href="/check-reports/{{profileData[1]}}"><button class="btn btn-primary mr-2">View user reports</button></a>
+              {% endif %}
+            </div>
+          {% elif profileData[8] == 'User' and role == 'Admin' %}
+            <div class="d-flex justify-content-end mt-4">
+              <button class="btn btn-danger  mr-2" onclick="reportUser()">Report Abuse</button>
+              <button class="btn btn-danger ml-2" onclick="banUser()">Ban User</button>
+              <button class="btn btn-primary ml-2" onclick="send_pm()"><i class="bi bi-chat"></i> Send Private Message</button>
+              {% if 0 in session["experiments"] %}
+              <a href="/check-reports/{{profileData[1]}}"><button class="btn btn-primary mr-2">View user reports</button></a>
+              {% endif %}
+            </div>
+          {% elif role == 'User' %}
+            <div class="d-flex justify-content-end mt-4">
+              <button class="btn btn-danger" onclick="reportUser()">Report Abuse</button>
+              <a href='/send-pm'><button class="btn btn-primary ml-2"><i class="bi bi-chat"></i> Send Private Message</button></a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <script>
+      function reportUser() {
+        window.location.replace('/report/{{ profileData[1] }}');
+      }
+
+      function banUser() {
+        window.location.replace('/banU/{{ profileData[1] }}');
+      }
+
+      function send_pm(){
+        window.location.replace('/send-pm')
+      }
+    </script>
+
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+        color: #333;
+      }
+
+      .hero {
+        background-color: #007bff;
+        color: #fff;
+      }
+
+      .list-group-item {
+        border: none;
+        font-size: 1.1rem;
+        padding: 1rem;
+      }
+
+      .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+        font-weight: bold;
+        font-size: 1.2rem;
+        padding: 10px 25px;
+        transition: all 0.2s ease-in-out;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0px 3px 15px rgba(0,0,255);
+      }
+
+      .btn-primary {
+        background-color: #0000FF;
+        border-color: #0000FF;
+        font-weight: bold;
+        font-size: 1.2rem;
+        padding: 10px 25px;
+        transition: all 0.2s ease-in-out;
+      }
+
+      .btn-danger:hover {
+        transform: translateY(-3px);
+        box-shadow: 0px 3px 15px rgba(220, 53, 69, 0.4);
+      }
+
+      .profile-info {
+        background-color: #fff;
+        border-radius: 20px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      
+    .profile-picture-container {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+
+    .profile-pic {
+  border-radius: 50%;
+  border: 5px solid black;
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+}
+
+
+
+      @media (max-width: 768px) {
+        .hero {
+          padding: 5rem 0;
+        }
+
+        .list-group-item {
+          font-size: 1rem;
+        }
+      }
+    </style>
+{% endblock %}

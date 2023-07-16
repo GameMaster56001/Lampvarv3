@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Report
+{% endblock %}
+
+{% block content %}
+    <div class="container py-5">
+        <form action="#" method="post">
+            <div class="mb-3">
+                <label for="reason" class="form-label"><b>Reason:</b></label>
+                <input type="text" class="form-control" id="reason" name="reason" required>
+            </div>
+
+            <button type="submit" class="btn btn-danger">Report</button>
+        </form>
+    </div>
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        h1 {
+            font-weight: bold;
+            font-size: 2rem;
+            color: #343a40;
+        }
+    </style>
+{% endblock %}

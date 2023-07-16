@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Ban List{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <h1 class="text-center mb-4">Ban List</h1>
+  <div class="row">
+    {% for ban in bans %}
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-lg">
+        <div class="card-body">
+          <h5 class="card-title">Ban ID: {{ ban[0] }}</h5>
+          <p class="card-text"><strong>Banned User:</strong> {{ ban[1] }}</p>
+          <p class="card-text"><strong>Ban Reason:</strong> {{ ban[2] }}</p>
+          <p class="card-text"><strong>Banned On:</strong> {{ ban[3] }}</p>
+          <p 
+class="card-text"><strong>Moderator:</strong> {{ ban[4]}}</p>
+          <a href="/unban/{{ ban[1] }}"><button class="btn btn-danger mt-3" type="button">Unban</button></a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    {% if not bans %}
+    <div class="col text-center">
+      <p>No bans yet luckily</p>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  body {
+    background-color: #f8f9fa;
+  }
+
+  .card {
+    border: none;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+</style>
+{% endblock %}

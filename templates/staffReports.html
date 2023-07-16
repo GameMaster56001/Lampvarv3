@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Reports Station
+{% endblock %}
+
+{% block content %}
+   <div class="container py-5">
+     <h1 style="color: #343a40">Reports</h1>
+     <hr>
+
+     {% for report in reports %}
+       <div class="card mb-3">
+         <div class="card-header bg-danger text-white fw-bold">{{ report[1] }} reported {{ report[2] }}</div>
+         <div class="card-body">
+           <p class="card-text">{{ report[3] }}</p>
+           <a href="/markDone/{{ report[0] }}" class="btn btn-success"><i class="bi bi-check2-circle"></i> Mark as done</a>
+         </div>
+       </div>
+     {% endfor %}
+
+     {% if not reports %}
+        <p>No reports have been submitted yet.</p>
+     {% endif %}
+   </div>
+
+   <style>
+     body {
+       background-color: #f8f9fa;
+       font-family: 'Roboto', sans-serif;
+     }
+
+     h1 {
+       font-weight: bold;
+       font-size: 3rem;
+       color: #343a40;
+       text-align: center;
+       margin-bottom: 2rem;
+     }
+
+     hr {
+       border-top: 2px solid #343a40;
+       margin-top: 0;
+     }
+
+     .card {
+       border-radius: 10px;
+       overflow: hidden;
+       box-shadow: 0 4px 6px rgba(154,160,185,.05), 0 1px 3px rgba(166,173,201,.2);
+       transition: transform 0.2s ease-in-out;
+     }
+
+     .card:hover {
+       transform: scale(1.02);
+       box-shadow: 0 8px 16px rgba(154,160,185,.2), 0 4px 8px rgba(166,173,201,.2);
+     }
+
+     .card-header {
+       font-size: 1.5rem;
+       background-color: #dc3545;
+     }
+
+     .btn-success {
+       background-color: #28a745;
+       border-color: #28a745;
+       font-weight: bold;
+       transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+     }
+
+     .btn-success:hover {
+       background-color: #218838; 
+border-color: #1e7e34;
+     }
+   </style>
+
+   <script>
+     // Smooth hover effect for cards
+     let cards = document.querySelectorAll('.card');
+     cards.forEach(card => {
+       card.addEventListener('mousemove', (e) => {
+         let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+         let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+         card.style.transform = rotateY(`${xAxis}deg) rotateX(${yAxis}deg`);
+       });
+
+       card.addEventListener('mouseenter', () => {
+         card.style.transition = 'none';
+       });
+
+       card.addEventListener('mouseleave', () => {
+         card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+         card.style.transition = 'transform 0.5s ease-in-out';
+       });
+     });
+   </script>
+{% endblock %}

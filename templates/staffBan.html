@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %} 
+  Ban Station 
+{% endblock %}
+{% block content %}
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Ban User</h5>
+      <form action="#" 
+method="post" class="needs-validation" novalidate>
+        <div class="form-group">
+          <label for="userBan">User:</label>
+          <input type="text" class="form-control" id="userBan" name="userBan" required>
+          <div class="invalid-feedback">
+            Please enter a username.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="reason">Reason:</label>
+          <input type="text" class="form-control" id="reason" name="reason" required>
+          <div class="invalid-feedback">
+            Please enter a reason for the ban.
+          </div>
+        </div>
+        <button type="submit" class="btn btn-danger">Ban</button>
+      </form>
+    </div>
+   </div>
+</div>
+
+<!-- Optional JavaScript for form validation -->
+<script>
+// Disable form submission if any fields are invalid
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Get the forms we want to add validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() ===  false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
+{% endblock %}

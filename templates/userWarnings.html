@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}User Warnings{% endblock %}
+{% block content %}
+{% for i in warnings %}
+<style>
+	.report {
+		border: 3px solid black;
+	}
+</style>
+<div class="report">
+	<p>Report ID: {{i[0]}}</p>
+	<p>Reporter: <a href="/search/{{i[1]}}">{{i[1]}}</a></p>
+	<p>Content: {{i[3]}}</p>
+</div><br/><br/>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Account Settings{% endblock %}
+
+{% block content %}
+  <h1 class="title">User Settings</h1> 
+
+  <div class="user-info card p-4 mb-4">
+    <span class="info-item"><strong>Username:</strong> {{username}}</span>
+    <span class="info-item"><strong>Role:</strong> {{role}}</span>
+    <span class="info-item"><strong>Gender:</strong> {{gender}}</span>
+  </div>
+
+  <button class="btn btn-primary" onclick="updateUsername()">Update username</button>
+  <button class="btn btn-primary" onclick="updateEmail()">Update email</button>
+  <button class="btn btn-primary" onclick="updatePassword()">Update password</button><br/><br/><br/><br/>
+
+  <style>
+    .form-switch-lg .form-check-input {
+  width: 2rem;
+  height: 1rem;
+}
+
+.form-switch-lg .form-check-label {
+  font-size: 1.2rem;
+}
+  </style>
+
+  <script>
+  	function updateUsername(){
+  		window.location.replace("settings/username")
+  	}
+
+  	function updatePassword(){
+  		window.location.replace("settings/password")
+  	}
+  </script>
+{% if session["role"] == "Admin" %}
+<b>Experiments<span class="beta">BETA</span></b><br/><br/>
+ <form action="#" method="post">
+  <input class="form-check-input" type="checkbox" value="0" name="experiment">
+  <label class="form-check-label">Enable admin mode</label><br/><br/>
+
+  <input class="form-check-input" type="checkbox" value="1" name="experiment">
+  <label class="form-check-label">Enable black theme mode</label><br/><br/>
+
+  <input class="form-check-input" type="checkbox" value="2" name="experiment">
+  <label class="form-check-label">Force use of authentication V2</label><br/><br/>
+
+  <input class="form-check-input" type="checkbox" value="100" name="experiment">
+  <label class="form-check-label">Disable all experiments</label><br/><br/>
+
+  <input type="submit" class="btn btn-primary" value="Save changes"></input>
+</form>
+
+
+{% endif %}
+{% endblock %}

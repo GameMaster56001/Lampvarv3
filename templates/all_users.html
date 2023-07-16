@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    All users
+{% endblock %}
+
+{% block content %}
+    <h1 style="color: #28527a; font-weight: bold;">All users ({{users_amount}})</h1>
+
+    <div style="display: flex; align-items: center; margin-bottom: 20px;">
+        <div style="font-weight: bold; margin-right: 10px;">Search:</div>
+        <input type="text" id="search-input" style="padding: 5px; border-radius: 5px; border: solid 1px #ccc;">
+    </div>
+
+    <hr style="border: dashed 2px #ccc; margin-bottom: 30px;">
+
+    <div style="display: flex; flex-wrap: wrap;" id="user-list">
+        {% for user in users %}
+            <div class="user">
+                <img src="{{ url_for('get_image', username=user[1]) }}" alt="" class="profile-pic">
+                <div class="user-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <span>User ID:</span>
+                    <span>{{user[0]}}</span>
+                </div>
+
+                <div class="user-body">
+                    <div class="user-info">
+                        <div class="user-label">Username:</div>
+                        <div class="user-value">{{user[1]}}</div>
+                    </div>
+
+                    <div class="user-info">
+                        <div class="user-label">Email:</div>
+                        <div class="user-value">{{user[2]}}</div>
+                    </div>
+
+                    <div class="user-info">
+                        <div class="user-label">Gender:</div>
+                        <div class="user-value">{{user[4]}}</div>
+                    </div>
+
+                    <div class="user-info">
+                        <div class="user-label">Creation Date:</div>
+                        <div class="user-value">{{user[7]}}</div>
+                    </div>
+
+                    <div class="user-info">
+                        <div class="user-label">Website Rank:</div>
+                        <div class="user-value">{{user[8]}}</div>
+                    </div>
+                    <a href="/moderate/{{user[1]}}"><button class="btn btn-primary">Moderate user</button></a>
+                </div>
+            </div>
+        {% endfor %}
+        {% if not users %}
+    	<p>There are no current users registered on the website sadly :(</p>
+    	{% endif %}
+    </div>
+
+    <style>
+        .user {
+            border: solid 2px #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: calc(33.33% - 20px);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .user:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .user-header {
+            font-weight: bold;
+            font-size: 20px;
+            color: #28527a;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .user-label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .profile-pic {
+  border-radius: 50%;
+  border: 5px solid black;
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+}
+    </style>
+
+    <script>
+        const userList = document.getElementById('user-list');
+        const searchInput = document.getElementById('search-input');
+
+        searchInput.addEventListener('input', function(event) {
+            const searchTerm = event.target.value.toLowerCase();
+
+            for (let i = 0; i < userList.children.length; i++) {
+                const user = userList.children[i];
+                const username =
+user.querySelector('.user-value').textContent.toLowerCase();
+
+                if (username.includes(searchTerm)) {
+                    user.style.display = 'block';
+                } else {
+                    user.style.display = 'none';
+                }
+            }
+        });
+    </script>
+{% endblock %}

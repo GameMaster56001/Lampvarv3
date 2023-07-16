@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Suspended
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6 text-center">
+      <img src="{{ url_for('get_image', username=session['username']) }}" alt="Profile Picture" class="profile-pic"><br/>
+      <h1 class="text-danger mb-4">Account Suspended</h1>
+      <p class="lead text-muted mb-5">Our website moderators have determined that your behavior at LampWar has violated our Terms of Service and conditions. Please abide by our rules to make our website family-friendly and safe from any harm as we intend to make this an enjoyable website.</p>
+
+      <div class="card mb-5">
+        <div class="card-body">
+          <h5 class="card-title mb-4">Reason:</h5>
+          <p class="card-text">{{reason}}</p>
+        </div>
+      </div>
+
+      <div class="card mb-5">
+        <div class="card-body">
+          <h5 class="card-title mb-4">Moderator:</h5>
+          <p class="card-text">{{moderator}}</p>
+        </div>
+      </div>
+
+      <div class="card mb-5">
+        <div class="card-body">
+          <h5 class="card-title mb-4">Reviewed on:</h5>
+          <p class="card-text">{{reviewed}}</p>
+        </div>
+      </div>
+      <a href="/logout"><button class="btn btn-danger">Logout</button><a>
+    </div>
+  </div>
+</div>
+
+
+
+<style>
+body {
+  background-color: #f8f9fa;
+font-family: 'Roboto', sans-serif;
+  color: #343a40;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 3rem;
+  color: #dc3545;
+  margin-bottom: 30px;
+}
+
+p.lead {
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+.profile-pic {
+  border-radius: 50%;
+  border: 5px solid black;
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+}
+
+
+.card {
+  border: none;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: #6c757d;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #343a40;
+  line-height: 1.5;
+}
+</style>
+{% endblock %}

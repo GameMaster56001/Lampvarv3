@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Upload image{% endblock %}
+
+{% block content %}
+  <form action="#" method="post" enctype="multipart/form-data" class="my-form">
+    <label for="image-upload" class="custom-file-upload">
+      <i class="fas fa-cloud-upload-alt"></i> Choose file
+    </label>
+    <input id="image-upload" type="file" name="image" accept="image/*">
+    <button type="submit" class="btn btn-primary">Upload</button>
+  </form>
+
+  <style>
+    .my-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 50px;
+    }
+
+    .custom-file-upload {
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        display: inline-block;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 18px;
+        border-radius: 4px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .custom-file-upload:hover {
+        background-color: #0062cc;
+    }
+
+    #image-upload {
+        display: none;
+    }
+
+    .btn-primary {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        margin-top: 20px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+        background-color: #218838;
+    }
+
+    i.fas.fa-cloud-upload-alt {
+        font-size: 30px;
+        margin-right: 10px;
+    }
+  </style>
+{% endblock %}

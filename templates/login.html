@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <form action="#" method="post" class="bg-white shadow rounded-lg p-5 needs-validation" novalidate>
+        <h1 class="text-center mb-4">Login</h1>
+        <div class="mb-3">
+          <input type="text" name="username" class="form-control" placeholder="Username" required>
+          <div class="invalid-feedback">
+            Please enter a username.
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="input-group">
+            <input type="password" name="password" class="form-control" placeholder="Password" required>
+            <button class="btn btn-outline-secondary toggle-password" type="button">
+              <i class="bi bi-eye"></i>
+            </button>
+            <div class="invalid-feedback">
+              Please enter a password.
+            </div>
+          </div>
+        </div>
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-primary btn-block mt-4">Log In</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap icons (required for "eye" icon) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-lXmO1zK+g7khc4pz3CuDMkL6PdmUJkRxrWl9+8tOhe5FZ9XzRf3OOdjh56jC1mRn" crossorigin="anonymous"></script>
+
+<style>
+  body {
+    background-color: #f8f9fa;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  h1 {
+    font-weight: bold;
+    font-size: 2rem;
+    color: #343a40;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    border: none;
+    border-radius: 0; 
+box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: #343a40;
+  }
+
+  input[type="text"]::placeholder,
+  input[type="password"]::placeholder {
+    color: #b5bbc1;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+  .btn-primary:hover {
+    background-color: #0062cc;
+    border-color: #005cbf;
+  }
+</style>
+
+<!-- Optional JavaScript for form validation and password toggle -->
+<script>
+  // Disable form submission if any fields are invalid
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      // Get the forms we want to add validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+
+  // Toggle password visibility on button click
+  const passwordToggleBtn = document.querySelector('.toggle-password');
+  const passwordInput = document.querySelector('input[name="password"]');
+  passwordToggleBtn.addEventListener('click', function() {
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    this.innerHTML = type === 'password' ?
+      '<i class="bi bi-eye"></i>' :
+      '<i class="bi bi-eye-slash"></i>';
+  });
+</script>
+{% endblock %}
